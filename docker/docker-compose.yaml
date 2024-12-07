@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: parcel-api-server
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - rabbitmq
+
+  db:
+    image: postgres:15
+    container_name: parcel-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: parcel-rabbitmq
+    ports:
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  worker:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    container_name: parcel-worker
+    command: celery -A parcel-api-server worker --loglevel=info
+    depends_on:
+      - rabbitmq
+      - db
+    env_file:
+      - .env
+
+volumes:
+  pg_data:
+  rabbitmq_data:
