@@ -10,7 +10,7 @@ class Offer(models.Model):
     broker = models.ForeignKey("broker.Broker", related_name="offers", on_delete=models.CASCADE)
     parcel = models.ForeignKey("parcel.Parcel", related_name="offers", on_delete=models.CASCADE)
     price_per_meter = models.DecimalField(
-        max_digits=settings.DEFAULT_DECIMAL_PLACES,
+        max_digits=settings.DEFAULT_MAX_DIGITS,
         decimal_places=settings.DEFAULT_DECIMAL_PLACES
     )
     creation_date = models.DateTimeField(auto_now_add=True)
