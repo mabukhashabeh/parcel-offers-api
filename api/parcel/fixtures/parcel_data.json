@@ -1,0 +1,38 @@
+[
+  {
+    "model": "parcel.parcel",
+    "pk": "b5fafe35-2b8d-4c68-92f8-1d6f1cc24c4e",
+    "fields": {
+      "block_number": "B101",
+      "neighbourhood": "Downtown",
+      "subdivision_number": "S1",
+      "land_use_group": "Residential",
+      "description": "Prime residential area with excellent facilities.",
+      "creation_date": "2024-12-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "parcel.parcel",
+    "pk": "d1c7b6de-82b0-4528-b7d4-5e3d68c95133",
+    "fields": {
+      "block_number": "B102",
+      "neighbourhood": "Uptown",
+      "subdivision_number": "S2",
+      "land_use_group": "Commercial",
+      "description": "A bustling commercial area suitable for businesses.",
+      "creation_date": "2024-12-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "parcel.parcel",
+    "pk": "a9f3bcb5-2ed5-43d1-9b6f-2eaf482b320d",
+    "fields": {
+      "block_number": "B103",
+      "neighbourhood": "Suburbs",
+      "subdivision_number": "S3",
+      "land_use_group": "Agricultural",
+      "description": "Spacious agricultural land ideal for farming.",
+      "creation_date": "2024-12-03T12:00:00Z"
+    }
+  }
+]
