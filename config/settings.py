@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
 
@@ -28,6 +29,8 @@ SECRET_KEY = 'django-insecure-)0&*svjhyn@o$sve*^3ujzdq0@idu7!j0d-p6gx7rh675avv3(
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+HOSTNAME = os.getenv('HOSTNAME', 'localhost')
 
 
 # Application definition
@@ -138,3 +141,10 @@ DEFAULT_DECIMAL_PLACES = 2
 
 # Celery Configuration
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'rabbitmq://localhost')
+
+# JWT configs
+CUSTOM_AUTH_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=1),  # 1 day
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=1),  # 1 hour
+    "ISSUER": HOSTNAME,
+}

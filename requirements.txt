@@ -5,3 +5,4 @@ django-filter==23.3
 celery==5.3.4
 requests==2.31.0
 amqp==5.1.1
+pyjwt==2.3.0

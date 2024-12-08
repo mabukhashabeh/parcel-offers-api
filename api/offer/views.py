@@ -1,9 +1,11 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import OfferFilter
 from .models import Offer
 from .serializers import OfferSerializer
+from ..authentication import JWTAuthentication
 from ..pagination import LimitOffsetPagination
 
 
@@ -15,6 +17,8 @@ class OfferViewSet(ModelViewSet):
     - /offer/
     - /offer/<id>/
     """
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
     filter_backends = [DjangoFilterBackend]
