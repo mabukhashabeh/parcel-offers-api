@@ -1,12 +1,11 @@
 from django.db import models
 import uuid
-from django.utils.translation import ugettext_lazy as _
 
 class Parcel(models.Model):
     class LandUseGroup(models.TextChoices):
-        AGRICULTURAL = "agricultural", _("Agricultural")
-        RESIDENTIAL = "residential", _("Residential")
-        COMMERCIAL = "commercial", _("Commercial")
+        AGRICULTURAL = "agricultural", "Agricultural"
+        RESIDENTIAL = "residential", "Residential"
+        COMMERCIAL = "commercial", "Commercial"
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     block_number = models.CharField(max_length=50)

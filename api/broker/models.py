@@ -1,12 +1,11 @@
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
 
 
 class Broker(models.Model):
     class Type(models.TextChoices):
-        AGRICULTURAL = "personal", _("Personal")
-        RESIDENTIAL = "company", _("Company")
-        COMMERCIAL = "governmental", _("Governmental")
+        AGRICULTURAL = "personal", "Personal"
+        RESIDENTIAL = "company", "Company"
+        COMMERCIAL = "governmental", "Governmental"
 
     name = models.CharField(max_length=150)
     type = models.CharField(max_length=20, choices=Type.choices)
