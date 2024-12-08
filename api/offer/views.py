@@ -1,6 +1,7 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.viewsets import ModelViewSet
+
+from .filters import OfferFilter
 from .models import Offer
 from .serializers import OfferSerializer
 from ..pagination import LimitOffsetPagination
@@ -16,10 +17,8 @@ class OfferViewSet(ModelViewSet):
     """
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
-    filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
-    search_fields = ['title', 'description', 'broker__name']
-    filterset_fields = ['broker', 'price_per_meter']
-    ordering_fields = ['price_per_meter', 'creation_date']
-    ordering = ['creation_date']
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = OfferFilter
+    ordering = ['-creation_date']
     http_method_names = ['get', 'post', 'patch', 'delete']
     pagination_class = LimitOffsetPagination

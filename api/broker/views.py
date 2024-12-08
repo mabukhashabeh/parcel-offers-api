@@ -18,8 +18,6 @@ class BrokerViewSet(ModelViewSet):
     serializer_class = BrokerSerializer
     filter_backends = [SearchFilter, OrderingFilter, DjangoFilterBackend]
     http_method_names = ['get', 'post']
-    search_fields = ['name', 'email']
-    filterset_fields = ['type']
-    ordering_fields = ['name', 'creation_date']
-    ordering = ['creation_date']
+    filterset_fields = ['name', 'email', 'type']
+    ordering = ['-creation_date']
     pagination_class = LimitOffsetPagination
