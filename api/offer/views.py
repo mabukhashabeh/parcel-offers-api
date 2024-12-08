@@ -3,6 +3,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Offer
 from .serializers import OfferSerializer
+from ..pagination import LimitOffsetPagination
+
 
 class OfferViewSet(ModelViewSet):
     """
@@ -20,3 +22,4 @@ class OfferViewSet(ModelViewSet):
     ordering_fields = ['price_per_meter', 'creation_date']
     ordering = ['creation_date']
     http_method_names = ['get', 'post', 'patch', 'delete']
+    pagination_class = LimitOffsetPagination

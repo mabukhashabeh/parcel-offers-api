@@ -3,6 +3,8 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Broker
 from .serializers import BrokerSerializer
+from ..pagination import LimitOffsetPagination
+
 
 class BrokerViewSet(ModelViewSet):
     """
@@ -20,3 +22,4 @@ class BrokerViewSet(ModelViewSet):
     filterset_fields = ['type']
     ordering_fields = ['name', 'creation_date']
     ordering = ['creation_date']
+    pagination_class = LimitOffsetPagination
