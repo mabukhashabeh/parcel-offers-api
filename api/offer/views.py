@@ -7,7 +7,7 @@ from .serializers import OfferSerializer
 class OfferViewSet(ModelViewSet):
     """
     A viewset for retrieving, creating, updating and deleting offers.
-    HTTP Methods: GET, POST, PUT, DELETE
+    HTTP Methods: GET, POST, PATCH, DELETE
     Endpoints:
     - /offer/
     - /offer/<id>/
@@ -19,3 +19,4 @@ class OfferViewSet(ModelViewSet):
     filterset_fields = ['broker', 'price_per_meter']
     ordering_fields = ['price_per_meter', 'creation_date']
     ordering = ['creation_date']
+    http_method_names = ['get', 'post', 'patch', 'delete']
