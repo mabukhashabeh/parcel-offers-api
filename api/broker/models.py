@@ -3,9 +3,9 @@ from django.db import models
 
 class Broker(models.Model):
     class Type(models.TextChoices):
-        AGRICULTURAL = "personal", "Personal"
-        RESIDENTIAL = "company", "Company"
-        COMMERCIAL = "governmental", "Governmental"
+        PERSONAL = "personal", "Personal"
+        COMPANY = "company", "Company"
+        GOVERNMENTAL = "governmental", "Governmental"
 
     name = models.CharField(max_length=150)
     type = models.CharField(max_length=20, choices=Type.choices)
