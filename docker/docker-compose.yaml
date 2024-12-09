@@ -4,6 +4,7 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     container_name: parcel-api-server
+    entrypoint: ["/bin/sh", "/app/docker/entrypoint.sh"]
     ports:
       - "8000:8000"
     volumes:

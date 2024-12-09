@@ -14,5 +14,3 @@ COPY docker/entrypoint.sh /app/docker/entrypoint.sh
 RUN chmod +x /app/docker/entrypoint.sh
 
 EXPOSE 8000
-
-ENTRYPOINT ["/bin/sh", "/app/docker/entrypoint.sh"]
