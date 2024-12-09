@@ -18,7 +18,6 @@ class BrokerTests(BaseTestCase):
         self.broker = Broker.objects.create(**self.broker_data)
 
     def test_get_broker_list(self):
-        self.client.credentials(HTTP_AUTHORIZATION=f"JWT {self.access_token}")
         response = self.client.get("/api/v1/brokers/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("name", response.json()[0])
