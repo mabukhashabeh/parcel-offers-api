@@ -1,33 +1,33 @@
-from django.test import TestCase
-from rest_framework.test import APIClient
 from rest_framework import status
-from api.offer.models import Offer
+
 from api.broker.models import Broker
+from api.offer.models import Offer
 from api.parcel.models import Parcel
+from api.tests.base_tests import BaseTestCase
 
 
-class OfferTests(TestCase):
+class OfferTests(BaseTestCase):
     def setUp(self):
-        self.client = APIClient()
+        super().setUp()
         self.broker = Broker.objects.create(
             name="Test Broker 1",
             type="personal",
             phone_number="123456789",
-            email="test.broker@example.com"
+            email="test.broker@example.com",
         )
         self.parcel = Parcel.objects.create(
             block_number="B101",
             neighbourhood="Downtown",
             subdivision_number="S1",
             land_use_group="Residential",
-            description="Prime residential area with excellent facilities."
+            description="Prime residential area with excellent facilities.",
         )
         self.offer_data = {
             "title": "Amazing Offer",
             "description": "A great deal for land parcels.",
             "broker_id": self.broker.id,
             "price_per_meter": 100.50,
-            "parcel_id": self.parcel.id
+            "parcel_id": self.parcel.id,
         }
         self.offer = Offer.objects.create(**self.offer_data)
 
@@ -47,7 +47,7 @@ class OfferTests(TestCase):
             "description": "Get land at a discounted price.",
             "price_per_meter": 120.00,
             "broker": self.broker.id,
-            "parcel": self.parcel.id
+            "parcel": self.parcel.id,
         }
         response = self.client.post("/api/v1/offers/", new_offer, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -59,9 +59,11 @@ class OfferTests(TestCase):
             "description": "A great deal for land parcels.",
             "price_per_meter": 100.50,
             "broker": self.broker.id,
-            "parcel": self.parcel.id
+            "parcel": self.parcel.id,
         }
-        response = self.client.patch(f"/api/v1/offers/{self.offer.id}/", updated_offer, format="json")
+        response = self.client.patch(
+            f"/api/v1/offers/{self.offer.id}/", updated_offer, format="json"
+        )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json()["title"], updated_offer["title"])
 

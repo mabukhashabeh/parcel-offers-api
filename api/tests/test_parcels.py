@@ -1,5 +1,7 @@
 from django.test import TestCase
+
 from api.parcel.models import Parcel
+
 
 class ParcelTests(TestCase):
     def setUp(self):

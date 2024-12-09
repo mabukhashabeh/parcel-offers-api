@@ -1,11 +1,12 @@
-from django.test import TestCase
-from rest_framework.test import APIClient
 from rest_framework import status
-from api.broker.models import Broker
 
-class BrokerTests(TestCase):
+from api.broker.models import Broker
+from api.tests.base_tests import BaseTestCase
+
+
+class BrokerTests(BaseTestCase):
     def setUp(self):
-        self.client = APIClient()
+        super().setUp()
         self.broker_data = {
             "name": "Test Broker",
             "type": "personal",
@@ -17,6 +18,7 @@ class BrokerTests(TestCase):
         self.broker = Broker.objects.create(**self.broker_data)
 
     def test_get_broker_list(self):
+        self.client.credentials(HTTP_AUTHORIZATION=f"JWT {self.access_token}")
         response = self.client.get("/api/v1/brokers/")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn("name", response.json()[0])
