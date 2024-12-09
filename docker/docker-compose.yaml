@@ -51,7 +51,10 @@ services:
       context: ..
       dockerfile: docker/Dockerfile
     container_name: parcel-worker
-    command: celery -A config.celery worker --loglevel=info
+    command: >
+      sh -c "
+      celery -A config.celery worker --loglevel=info &&
+      celery -A config.celery beat --loglevel=info"
     volumes:
       - ..:/app
     depends_on:

@@ -13,6 +13,8 @@ import datetime
 import os
 from pathlib import Path
 
+from celery.schedules import crontab
+
 from api import APPS
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -147,4 +149,12 @@ CUSTOM_AUTH_JWT = {
     "ACCESS_TOKEN_LIFETIME": datetime.timedelta(days=1),  # 1 day
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=1),  # 1 hour
     "ISSUER": HOSTNAME,
+}
+
+# Celery Beat Configuration
+CELERY_BEAT_SCHEDULE = {
+    "monitor-parcels-every-5-minutes": {
+        "task": "tasks.monitor_parcel_offers_task",
+        "schedule": crontab(minute="*/5"),  # Adjust the schedule as needed
+    },
 }
