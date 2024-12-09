@@ -154,6 +154,6 @@ CUSTOM_AUTH_JWT = {
 CELERY_BEAT_SCHEDULE = {
     "monitor-parcels-every-5-minutes": {
         "task": "tasks.monitor_parcel_offers_task",
-        "schedule": crontab(minute="*/5"),  # Adjust the schedule as needed
+        "schedule": crontab(minute="*/5"),  # run every 5 minutes
     },
 }
