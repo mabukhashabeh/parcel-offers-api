@@ -45,6 +45,26 @@ docker-compose up --build
 docker-compose exec web python manage.py test
 ```
 
+### 5. Authentication
+### Access Token Generation
+To generate an access token for a user and authenticate request against, use the `jwt_token_generator` module in the
+`api/authentication` package.
+```bash
+#Run Python interactive shell
+docker-compose exec web python manage.py shell
+```
+
+```python
+from django.contrib.auth import get_user_model
+from api.authentication import jwt_token_generator
+
+# retrieve already created user
+user = get_user_model().objects.get(username="testuser")
+# Generate tokens
+tokens = jwt_token_generator.make_tokens(user)
+print("Access Token:", tokens.access)
+```
+
 ## API Testing
 
 ### Postman Collection
