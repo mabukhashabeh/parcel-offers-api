@@ -1,0 +1,32 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.9.1
+    hooks:
+      - id: black
+        args: ["--line-length=88"]
+        exclude: 'migrations/*'
+
+  - repo: https://github.com/myint/autoflake
+    rev: v2.3.0
+    hooks:
+      - id: autoflake
+        args:
+          - --in-place
+          - --remove-unused-variables
+          - --remove-all-unused-imports
+        exclude: 'migrations/*'
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+        exclude: 'migrations/*'
+
+  # - repo: local
+  #   hooks:
+  #     - id: run-django-tests
+  #       name: Run Django Tests
+  #       entry: docker-compose -f docker/docker-compose.yaml run -T web python manage.py test --keepdb --verbosity=3
+  #       language: system
+  #       types: [ python ]

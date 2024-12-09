@@ -1,8 +1,10 @@
+import logging
+
 import requests
 from celery import shared_task
-from django.db.models import Count, Q, F
+from django.db.models import Count, F, Q
+
 from api.parcel.models import Parcel
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -13,10 +15,14 @@ def monitor_parcel_offers_task():
     Periodic task to monitor parcels and send notifications when all parcels in
     a combination (block_number + subdivision_number) have active offers.
     """
-    parcels = Parcel.objects.values("block_number", "subdivision_number").annotate(
-        total_count=Count("id"),
-        active_count=Count("id", filter=Q(offers__isnull=False)),
-    ).filter(total_count=F("active_count"))  # only combinations where all are has active offers
+    parcels = (
+        Parcel.objects.values("block_number", "subdivision_number")
+        .annotate(
+            total_count=Count("id"),
+            active_count=Count("id", filter=Q(offers__isnull=False)),
+        )
+        .filter(total_count=F("active_count"))
+    )  # only combinations where all are has active offers
 
     notifications = [
         {

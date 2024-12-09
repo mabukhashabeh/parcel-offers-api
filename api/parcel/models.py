@@ -1,5 +1,7 @@
-from django.db import models
 import uuid
+
+from django.db import models
+
 
 class Parcel(models.Model):
     class LandUseGroup(models.TextChoices):
