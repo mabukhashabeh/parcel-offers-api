@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "9008063c-86bf-44b7-98aa-7a08857c91f7",
+		"name": "Parcel Offers API",
+		"description": "Postman collection for verifying the Parcel Offers API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6944401"
+	},
+	"item": [
+		{
+			"name": "Get All Brokers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/v1/brokers/?limit=10&offset=0",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"brokers",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "email",
+							"value": "admin@admin.me",
+							"disabled": true
+						},
+						{
+							"key": "type",
+							"value": "personal",
+							"disabled": true
+						},
+						{
+							"key": "name",
+							"value": "test test",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Broker",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/api/v1/brokers/1/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"brokers",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Broker",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"test user\",\n  \"type\": \"personal\",\n  \"phone_number\": \"123456789\",\n  \"email\": \"admin@admin.me\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/brokers/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"brokers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Offers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwidXNlcl9pZCI6IjEiLCJqdGkiOiJmNGQ1ZDY3MmY1NTY0NDQyODg2ZTUxYzMyMTFjZjQzZiIsImV4cCI6MTczMzc4NjA2My42MDczOTYsImlhdCI6MTczMzY5OTY2My42MDczOTYsImlzcyI6IjhhNzg0ZmY2N2NiOSJ9.zWKSfZIdwlEMI5E_OnRcHU33kxlIXFvvVyxhwvi0Bf4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/v1/offers/?limit=10&offset=0&broker=2&parcel=d1c7b6de-82b0-4528-b7d4-5e3d68c95133",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"offers",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "broker",
+							"value": "2"
+						},
+						{
+							"key": "parcel",
+							"value": "d1c7b6de-82b0-4528-b7d4-5e3d68c95133"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Offer",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Special Offer Updated\",\n  \"description\": \"Land parcels for sale\",\n  \"broker\": 2,\n  \"price_per_meter\": 30,\n  \"parcel\": \"d1c7b6de-82b0-4528-b7d4-5e3d68c95133\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/offers/{{offer_id}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"offers",
+						"{{offer_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Offer",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/offers/{{offer_id}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"offers",
+						"{{offer_id}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Offer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Special Offer 1\",\n    \"description\": \"Land parcels for sale\",\n    \"broker\": 1,\n    \"price_per_meter\": 150.00,\n    \"parcel\": \"d1c7b6de-82b0-4528-b7d4-5e3d68c95133\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/v1/offers/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"offers",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
